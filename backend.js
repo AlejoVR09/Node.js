@@ -10,7 +10,6 @@ async function getSomeNumber(){
         .then(response => response.json())
         .then(data => {
             quantityOfTexts=parseInt(data)
-            
         })
         .then(()=>{
             for (let i = 0; i < quantityOfTexts; i++) {
@@ -19,28 +18,28 @@ async function getSomeNumber(){
                 test.appendChild(text);    
             }
             anotherVar=quantityOfTexts+2
-            return anotherVar
+            sendSomeNumber(anotherVar);
+            
         })
-        console.log(anotherVar)
 }
 
-async function sendSomeNumber(anotherNumber){
+function sendSomeNumber(anotherNumber){
     
     fetch("http://localhost:3000/hola",{
         method:'post',
         headers: {
-            'Content-Type':'applicacion/json'
+            'Content-Type':'application/json'
         },
         body: JSON.stringify({
-            number:anotherNumber    
+            anotherNumber    
         })
     })
 }
 
 async function main(){
-    anotherVar=await getSomeNumber();
-    console.log(anotherVar)
-    await sendSomeNumber(anotherVar);
+    await getSomeNumber();
+    
+    
 }
 
 main()

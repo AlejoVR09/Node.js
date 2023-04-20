@@ -16,7 +16,7 @@ app.get('/hola',(req,res)=>{
 })
 
 app.post('/hola',(req,res)=>{
-    let number=req.body.number || "";
+    let number=req.body.anotherNumber;
     console.log(number)
     res.end();
 })
