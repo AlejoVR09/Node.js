@@ -2,10 +2,11 @@ const test= document.getElementById("test");
 
 let quantityOfTexts;
 let anotherVar;
+let anotherMulti;
 
 
 
-async function getSomeNumber(){
+function getSomeNumber(){
     fetch("http://localhost:3000/hola")
         .then(response => response.json())
         .then(data => {
@@ -24,7 +25,6 @@ async function getSomeNumber(){
 }
 
 function sendSomeNumber(anotherNumber){
-    
     fetch("http://localhost:3000/hola",{
         method:'post',
         headers: {
@@ -34,13 +34,36 @@ function sendSomeNumber(anotherNumber){
             anotherNumber    
         })
     })
+    getMulti();
 }
 
-async function main(){
-    await getSomeNumber();
-    
-    
+function getMulti(){
+    fetch("http://localhost:3000/multiply")
+        .then(response => response.json())
+        .then(data => {
+            anotherMulti=parseInt(data)*2;
+        })
+        .then(()=>{
+            console.log(anotherMulti);
+            sendMulti(anotherMulti);
+        })
+        .catch((err)=>{
+            console.log('Aun no es procesado el fetch')
+        })
+        
 }
 
-main()
+function sendMulti(anotherMult){
+    fetch("http://localhost:3000/multiply",{
+        method:'post',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            anotherMult
+        })
+    })
+}
+
+getSomeNumber();
 
